@@ -17,7 +17,7 @@ public class CapicuaService : ICapicuaService
     {
         try
         {
-            if (validateWord(capicua) && ExistWordValidate(capicua) )
+            if (validateWord(capicua) && ExistWordValidate(capicua))
             {
                 //capicua.Created = DateTime.Now;
                 capicuaContext.capicuas.Add(capicua);
@@ -41,28 +41,32 @@ public class CapicuaService : ICapicuaService
     public bool validateWord(Capicua capicua)
     {
         string cleanWord = capicua.Word;
-        cleanWord = cleanWord.Replace(" ","").Replace(".","").Replace("-","").ToLower();
-         bool validate = false;               
+        cleanWord = cleanWord.Replace(" ", "").Replace(".", "").Replace("-", "").ToLower();
+        bool validate = false;
         char[] ArrWord = cleanWord.ToCharArray();
-         
-        for(int letter = 0;letter < ArrWord.Count(); letter++){
 
-            if(ArrWord[letter]==ArrWord[ArrWord.Count() -(letter+1)]){
+        for (int letter = 0; letter < ArrWord.Count(); letter++)
+        {
+
+            if (ArrWord[letter] == ArrWord[ArrWord.Count() - (letter + 1)])
+            {
                 validate = true;
-               
-            }else{
+
+            }
+            else
+            {
                 validate = false;
             }
         }
-        Console.Write("validate word "+validate);
+
         return validate;
     }
 
     public bool ExistWordValidate(Capicua capicua)
     {
         int capi = capicuaContext.capicuas.Where(x => x.Word == capicua.Word).Count();
-        Console.WriteLine("count .."+capi);
-        if (capi==0)
+
+        if (capi == 0)
         {
             return true;
         }
